@@ -7,7 +7,7 @@ class TabNavigator extends StatefulWidget{
 
 }
 
-class _TabNavigatorState extends State<TabNavigator>{
+class _TabNavigatorState extends State<TabNavigator>with AutomaticKeepAliveClientMixin{
   final _defaultColor = Colors.grey;
   final _activeColor = Colors.blue;
 
@@ -19,9 +19,11 @@ class _TabNavigatorState extends State<TabNavigator>{
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     // TODO: implement build
     return Scaffold(
       body: PageView(
+        physics: NeverScrollableScrollPhysics(),
         controller: _controller,
         children: <Widget>[
           HomePage(),
@@ -55,5 +57,16 @@ class _TabNavigatorState extends State<TabNavigator>{
       },type: BottomNavigationBarType.fixed)
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 
 }
