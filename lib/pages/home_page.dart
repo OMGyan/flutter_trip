@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_trip/dao/home_dao.dart';
 import 'package:flutter_trip/model/common_model.dart';
+import 'package:flutter_trip/model/grid_nav_model.dart';
 import 'package:flutter_trip/model/home_model.dart';
+import 'package:flutter_trip/widget/grid_nav.dart';
 import 'package:flutter_trip/widget/local_nav.dart';
 
 class HomePage extends StatefulWidget{
@@ -16,6 +18,7 @@ class _HomePageState extends State<HomePage>{
   String data = '';
   
   List<CommonModel> localNavList;
+  GridNavModel gridNavModel;
   double appBarAlpha = 0;
   final APPBAR_SCROLL_OFFSET = 100;
 
@@ -60,6 +63,7 @@ class _HomePageState extends State<HomePage>{
                   Padding(padding: EdgeInsets.fromLTRB(5, 4, 5, 4)
                   ,child:LocalNav(localNavList: localNavList)
                   ),
+                  GridNav(gridNavModel: gridNavModel),
                   Container(
                       child: ListTile(title: Text(data))
                   )
@@ -93,8 +97,9 @@ class _HomePageState extends State<HomePage>{
   void loadData() {
     HomeDao.fetch().then((HomeModel res){
       setState(() {
-        data = jsonEncode(res);
+
         localNavList = res.localNavList;
+        gridNavModel = res.gridNav;
       });
     }).catchError((e){
       setState(() {
