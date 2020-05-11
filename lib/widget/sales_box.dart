@@ -19,6 +19,7 @@ class SalesBox extends StatelessWidget{
 
     return Container(
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(6)),
         color: Colors.white,
       ),child:_items(context)
     );
