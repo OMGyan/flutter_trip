@@ -7,8 +7,11 @@ import 'package:flutter_trip/dao/home_dao.dart';
 import 'package:flutter_trip/model/common_model.dart';
 import 'package:flutter_trip/model/grid_nav_model.dart';
 import 'package:flutter_trip/model/home_model.dart';
+import 'package:flutter_trip/model/sales_box_model.dart';
 import 'package:flutter_trip/widget/grid_nav.dart';
 import 'package:flutter_trip/widget/local_nav.dart';
+import 'package:flutter_trip/widget/sales_box.dart';
+import 'package:flutter_trip/widget/sub_nav.dart';
 
 class HomePage extends StatefulWidget{
   @override
@@ -20,7 +23,10 @@ class _HomePageState extends State<HomePage>with AutomaticKeepAliveClientMixin{
   
   List<CommonModel> localNavList;
   GridNavModel gridNavModel;
+  List<CommonModel> subNavList;
+  SalesBoxModel salesBox;
   double appBarAlpha = 0;
+
   final APPBAR_SCROLL_OFFSET = 100;
 
   List _imageUrls = [
@@ -72,9 +78,14 @@ class _HomePageState extends State<HomePage>with AutomaticKeepAliveClientMixin{
                   Padding(padding: EdgeInsets.fromLTRB(5,0,5,4),
                   child:GridNav(gridNavModel: gridNavModel)
                   ),
+                  Padding(padding: EdgeInsets.fromLTRB(5,0,5,4),
+                  child: SubNav(SubNavList: subNavList),
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(5,0,5,4),
+                    child: SalesBox(salesBox: salesBox),
+                  ),
                   Container(
-                      child: ListTile(title: Text(data)),
-                    height: 800,
+                      child: ListTile(title: Text(data))
                   )
                 ]
             )
@@ -106,9 +117,10 @@ class _HomePageState extends State<HomePage>with AutomaticKeepAliveClientMixin{
   void loadData() {
     HomeDao.fetch().then((HomeModel res){
       setState(() {
-
         localNavList = res.localNavList;
         gridNavModel = res.gridNav;
+        subNavList = res.subNavList;
+        salesBox = res.salesBox;
       });
     }).catchError((e){
       setState(() {
