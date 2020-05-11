@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_trip/dao/home_dao.dart';
@@ -14,8 +15,8 @@ class HomePage extends StatefulWidget{
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>{
-  String data = '';
+class _HomePageState extends State<HomePage>with AutomaticKeepAliveClientMixin{
+  String data = 'result';
   
   List<CommonModel> localNavList;
   GridNavModel gridNavModel;
@@ -35,6 +36,11 @@ class _HomePageState extends State<HomePage>{
     loadData();
   }
 
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
   
 
   @override
@@ -63,9 +69,12 @@ class _HomePageState extends State<HomePage>{
                   Padding(padding: EdgeInsets.fromLTRB(5, 4, 5, 4)
                   ,child:LocalNav(localNavList: localNavList)
                   ),
-                  GridNav(gridNavModel: gridNavModel),
+                  Padding(padding: EdgeInsets.fromLTRB(5,0,5,4),
+                  child:GridNav(gridNavModel: gridNavModel)
+                  ),
                   Container(
-                      child: ListTile(title: Text(data))
+                      child: ListTile(title: Text(data)),
+                    height: 800,
                   )
                 ]
             )
@@ -107,5 +116,9 @@ class _HomePageState extends State<HomePage>{
       });
     });
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 
 }

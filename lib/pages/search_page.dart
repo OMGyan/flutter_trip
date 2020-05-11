@@ -6,7 +6,7 @@ class SearchPage extends StatefulWidget{
 
 }
 
-class _SearchPageState extends State<SearchPage>{
+class _SearchPageState extends State<SearchPage>with AutomaticKeepAliveClientMixin{
 
 
   @override
@@ -18,5 +18,9 @@ class _SearchPageState extends State<SearchPage>{
       )
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 
 }

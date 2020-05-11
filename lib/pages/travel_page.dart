@@ -6,7 +6,7 @@ class TravelPage extends StatefulWidget{
 
 }
 
-class _TravelPageState extends State<TravelPage>{
+class _TravelPageState extends State<TravelPage>with AutomaticKeepAliveClientMixin{
 
 
   @override
@@ -18,5 +18,9 @@ class _TravelPageState extends State<TravelPage>{
       )
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 
 }

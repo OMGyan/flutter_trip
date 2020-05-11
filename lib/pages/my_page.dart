@@ -6,7 +6,7 @@ class MyPage extends StatefulWidget{
 
 }
 
-class _MyPageState extends State<MyPage>{
+class _MyPageState extends State<MyPage>with AutomaticKeepAliveClientMixin{
 
 
   @override
@@ -18,5 +18,9 @@ class _MyPageState extends State<MyPage>{
       )
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 
 }
