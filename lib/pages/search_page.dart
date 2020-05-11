@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_trip/widget/search_bar.dart';
 
 class SearchPage extends StatefulWidget{
   @override
@@ -13,9 +14,13 @@ class _SearchPageState extends State<SearchPage>with AutomaticKeepAliveClientMix
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body:Center(
-        child: Text('搜索')
-      )
+      appBar: AppBar(),
+      body:Column(children: <Widget>[
+        SearchBar(hideLeft: true,defaultText: '哈哈',hint: '123',
+        leftBtnClick: (){Navigator.of(context).pop();},
+          onChange: _onTextChange,
+        )
+      ],)
     );
   }
 
@@ -23,4 +28,8 @@ class _SearchPageState extends State<SearchPage>with AutomaticKeepAliveClientMix
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
+
+  _onTextChange(String value) {
+
+  }
 }
