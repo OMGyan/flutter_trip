@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
@@ -74,13 +75,11 @@ class _WebViewState extends State<WebView>{
   @override
   void dispose() {
     // TODO: implement dispose
-    super.dispose();
     _onUrlChange.cancel();
     _onStateChange.cancel();
     _onHttpError.cancel();
-
     webviewReference.dispose();
-
+    super.dispose();
   }
 
   @override
@@ -102,14 +101,17 @@ class _WebViewState extends State<WebView>{
                 child: Text('Waiting...'),
               ),
             ),
-          ))
+          ),)
         ],
-
       ),
     );
   }
 
   _appBar(Color backgroundColor,Color backButtonColor) {
+    return Container(
+      color: backgroundColor,
+      height:MediaQueryData.fromWindow(window).padding.top,
+    );
     if(widget.hideAppBar??false){
       return Container(
         color: backgroundColor,
@@ -117,6 +119,8 @@ class _WebViewState extends State<WebView>{
       );
     }
     return Container(
+      color: backgroundColor,
+      padding:EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
       child: FractionallySizedBox(
         widthFactor: 1,
         child: Stack(
@@ -125,7 +129,8 @@ class _WebViewState extends State<WebView>{
               child: Container(
                 margin: EdgeInsets.only(left: 10),
                 child: Icon(Icons.close,color: backButtonColor,size: 26)
-              ),
+              ),onTap: (){
+                Navigator.of(context).pop();},
             ),
             Positioned(child: Center(
               child: Text(widget.title??'',style: TextStyle(color: backButtonColor,fontSize: 20))
