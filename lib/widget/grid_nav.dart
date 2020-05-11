@@ -18,8 +18,11 @@ class GridNav extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Column(
-      children:_gridNavItems(context)
+    return PhysicalModel(
+      child:Column(children:_gridNavItems(context)),
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(6),
+      clipBehavior: Clip.antiAlias
     );
   }
 
@@ -55,14 +58,16 @@ class GridNav extends StatelessWidget{
     );
   }
   _mainItem(BuildContext context,CommonModel model){
+    print(model.icon+""+model.title);
     return Expanded(child: _wrapGesture(context,
         Stack(
           children: <Widget>[
             Image.network(model.icon,fit: BoxFit.contain,height: 88,width: 121,alignment: AlignmentDirectional.bottomEnd),
-            Text(model.title,style: TextStyle(fontSize: 14,color: Colors.white))
+            Container(alignment:Alignment.topCenter,margin: EdgeInsets.only(top: 11),
+                child:Text(model.title,style: TextStyle(fontSize: 14,color: Colors.white)))
           ],
         ),model
-    ),flex: 1);
+    ));
   }
 
   _doubleItem(BuildContext context,CommonModel topItem,CommonModel bottomItem){
@@ -71,10 +76,11 @@ class GridNav extends StatelessWidget{
         Expanded(child: _item(context,topItem,true)),
         Expanded(child: _item(context,bottomItem,false))
       ],
-    ),flex: 1) ;
+    ));
   }
 
   _item(BuildContext context,CommonModel item,bool isFirstItem){
+    print(item.title);
     BorderSide borderSide = BorderSide(width: 0.8,color: Colors.white);
     return FractionallySizedBox(
       child: Container(
@@ -99,7 +105,7 @@ class GridNav extends StatelessWidget{
               return WebView(title: model.title,url: model.url,statusBarColor: model.statusBarColor,hideAppBar: model.hideAppBar);
             }));
       },
-
+      child: widget
     );
   }
 }
