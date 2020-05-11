@@ -4,10 +4,9 @@ import 'package:flutter_trip/pages/pages_index.dart';
 class TabNavigator extends StatefulWidget{
   @override
   _TabNavigatorState createState() => _TabNavigatorState();
-
 }
 
-class _TabNavigatorState extends State<TabNavigator>with AutomaticKeepAliveClientMixin{
+class _TabNavigatorState extends State<TabNavigator>{
   final _defaultColor = Colors.grey;
   final _activeColor = Colors.blue;
 
@@ -19,7 +18,6 @@ class _TabNavigatorState extends State<TabNavigator>with AutomaticKeepAliveClien
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     // TODO: implement build
     return Scaffold(
       body: PageView(
@@ -64,9 +62,5 @@ class _TabNavigatorState extends State<TabNavigator>with AutomaticKeepAliveClien
     super.dispose();
     _controller.dispose();
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 
 }
