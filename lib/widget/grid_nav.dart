@@ -58,7 +58,6 @@ class GridNav extends StatelessWidget{
     );
   }
   _mainItem(BuildContext context,CommonModel model){
-    print(model.icon+""+model.title);
     return Expanded(child: _wrapGesture(context,
         Stack(
           children: <Widget>[
@@ -80,7 +79,6 @@ class GridNav extends StatelessWidget{
   }
 
   _item(BuildContext context,CommonModel item,bool isFirstItem){
-    print(item.title);
     BorderSide borderSide = BorderSide(width: 0.8,color: Colors.white);
     return FractionallySizedBox(
       child: Container(
