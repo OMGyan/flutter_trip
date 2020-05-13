@@ -47,10 +47,13 @@ class _TabNavigatorState extends State<TabNavigator>{
             title: Text('我的',style: TextStyle(color: _currentIndex!=3?_defaultColor:_activeColor))
         )
       ],currentIndex: _currentIndex,onTap: (index){
-        _controller.jumpToPage(index);
-        setState(() {
-          _currentIndex = index;
-        });
+        if(_currentIndex!=index){///优化不重复执行切换page
+          _controller.jumpToPage(index);
+          setState(() {
+            _currentIndex = index;
+          });
+        }
+
       },type: BottomNavigationBarType.fixed)
     );
   }
@@ -62,3 +65,4 @@ class _TabNavigatorState extends State<TabNavigator>{
   }
 
 }
+

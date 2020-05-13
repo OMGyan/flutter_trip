@@ -89,7 +89,7 @@ class _SearchBarState extends State<SearchBar>{
         Icon(Icons.search,size: 20,color: widget.searchBarType == SearchBarType.normal?
           Color(0xffa9a9a9):Colors.blue),
         Expanded(child: widget.searchBarType==SearchBarType.normal?
-        TextField(controller: _controller,onChanged: _onChanged,autofocus: true,
+        TextField(controller: _controller,onChanged: _onChanged,
         style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.w300,
           textBaseline: TextBaseline.alphabetic,
         ),
@@ -116,7 +116,29 @@ class _SearchBarState extends State<SearchBar>{
     ));
   }
   _genHomeSearch(){
+    return Container(
+      child: Row(
+        children: <Widget>[
+          _wrapTap(Container(
+            padding: EdgeInsets.fromLTRB(6,5,5,5),
+            child: Row(children: <Widget>[
+              Text("上海",style: TextStyle(fontSize: 14,color: _homeFontColor())),
+              Icon(Icons.expand_more,color: _homeFontColor(),size: 22)
+            ],)
+          ),widget.leftBtnClick),
+          Expanded(child: _inputBox()),
+          _wrapTap(Container(
+              padding: EdgeInsets.fromLTRB(10,5,10,5),
+              child: Icon(Icons.comment,color: _homeFontColor(),size: 26)
+          ),widget.rightBtnClick)
+        ],
+      ),
+    );
+  }
 
+  _homeFontColor(){
+    return widget.searchBarType == SearchBarType.homeLight?
+        Colors.black54:Colors.white;
   }
 
   _onChanged(String text){
