@@ -12,7 +12,7 @@ class _SearchPageState extends State<SearchPage>with AutomaticKeepAliveClientMix
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    super.build(context);
     return Scaffold(
       appBar: AppBar(),
       body:Column(children: <Widget>[

@@ -11,7 +11,7 @@ class _MyPageState extends State<MyPage>with AutomaticKeepAliveClientMixin{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    super.build(context);
     return Scaffold(
       body:Center(
         child: Text('我的')

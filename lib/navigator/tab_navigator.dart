@@ -18,7 +18,6 @@ class _TabNavigatorState extends State<TabNavigator>{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
@@ -58,7 +57,6 @@ class _TabNavigatorState extends State<TabNavigator>{
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _controller.dispose();
   }

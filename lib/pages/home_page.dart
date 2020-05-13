@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +25,13 @@ class _HomePageState extends State<HomePage>with AutomaticKeepAliveClientMixin{
   
   List<CommonModel> localNavList=[];
   List<CommonModel> bannerList=[];
-  GridNavModel gridNavModel=null;
+  GridNavModel gridNavModel;
   List<CommonModel> subNavList=[];
-  SalesBoxModel salesBox=null;
+  SalesBoxModel salesBox;
   double appBarAlpha = 0;
   bool _loading = true;
 
-  final APPBAR_SCROLL_OFFSET = 100;
+  final appbarScrollOffset = 100;
 
 
 
@@ -49,9 +49,9 @@ class _HomePageState extends State<HomePage>with AutomaticKeepAliveClientMixin{
   }
   
 
-  @override
+
   Widget build(BuildContext context) {
-    // TODO: implement build
+    super.build(context);
     return Scaffold(
       backgroundColor: Color(0xfff2f2f2),
       body:LoadingContainer(isLoading:_loading,child:
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage>with AutomaticKeepAliveClientMixin{
                       child:GridNav(gridNavModel: gridNavModel)
                   ),
                   Padding(padding: EdgeInsets.fromLTRB(5,0,5,4),
-                    child: SubNav(SubNavList: subNavList),
+                    child: SubNav(subNavList: subNavList),
                   ),
                   Padding(padding: EdgeInsets.fromLTRB(5,0,5,4),
                     child: SalesBox(salesBox: salesBox),
@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage>with AutomaticKeepAliveClientMixin{
   }
 
   void _onScroll(double pixels) {
-    double alpha = pixels/APPBAR_SCROLL_OFFSET;
+    double alpha = pixels/appbarScrollOffset;
     if(alpha<0){
       alpha = 0;
     }else if(alpha > 1){

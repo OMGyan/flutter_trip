@@ -5,9 +5,8 @@ import 'package:flutter_trip/model/sales_box_model.dart';
 
 import 'webview.dart';
 
-/**
- * 底部卡片路口
- */
+
+//底部卡片路口
 class SalesBox extends StatelessWidget{
 
   final SalesBoxModel salesBox;

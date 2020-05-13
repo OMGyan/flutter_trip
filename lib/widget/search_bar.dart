@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_trip/model/common_model.dart';
-
-import 'webview.dart';
-
 enum SearchBarType{home,normal,homeLight}
 
 class SearchBar extends StatefulWidget{

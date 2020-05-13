@@ -112,7 +112,8 @@ class _WebViewState extends State<WebView>{
       color: backgroundColor,
       height:MediaQueryData.fromWindow(window).padding.top,
     );
-    if(widget.hideAppBar??false){
+
+    /*if(widget.hideAppBar??false){
       return Container(
         color: backgroundColor,
         height:MediaQueryData.fromWindow(window).padding.top,
@@ -139,7 +140,7 @@ class _WebViewState extends State<WebView>{
         ),
 
       ),
-    );
+    );*/
 
   }
 

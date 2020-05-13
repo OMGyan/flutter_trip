@@ -2,9 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-/**
- * 记载进度条
- */
+
+//记载进度条
 class LoadingContainer extends StatelessWidget {
 
   final Widget child;

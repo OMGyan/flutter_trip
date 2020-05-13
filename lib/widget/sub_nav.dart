@@ -6,9 +6,9 @@ import 'webview.dart';
 
 class SubNav extends StatelessWidget{
 
-  final List<CommonModel> SubNavList;
+  final List<CommonModel> subNavList;
 
-  const SubNav({Key key,@required this.SubNavList}):super(key:key);
+  const SubNav({Key key,@required this.subNavList}):super(key:key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +22,13 @@ class SubNav extends StatelessWidget{
   }
 
   _items(BuildContext context) {
-    if(SubNavList == null) return null;
+    if(subNavList == null) return null;
     List<Widget> items = [];
-    SubNavList.forEach((model){
+    subNavList.forEach((model){
       items.add(_item(context,model));
     });
     //计算出第一行显示的数量
-    int separate = (SubNavList.length/2+0.5).toInt();
+    int separate = (subNavList.length/2+0.5).toInt();
     return Column(children: <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,7 +36,7 @@ class SubNav extends StatelessWidget{
       ),
       Padding(padding: EdgeInsets.only(top: 10),child:Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: items.sublist(separate,SubNavList.length),
+        children: items.sublist(separate,subNavList.length),
       ))
     ]);
   }

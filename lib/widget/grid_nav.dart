@@ -6,9 +6,7 @@ import 'package:flutter_trip/model/common_model.dart';
 import 'package:flutter_trip/model/grid_nav_model.dart';
 import 'package:flutter_trip/widget/webview.dart';
 
-/**
- * 网格布局
- */
+//网格布局
 class GridNav extends StatelessWidget{
 
   final GridNavModel gridNavModel;

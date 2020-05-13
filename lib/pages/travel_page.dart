@@ -11,7 +11,7 @@ class _TravelPageState extends State<TravelPage>with AutomaticKeepAliveClientMix
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    super.build(context);
     return Scaffold(
       body:Center(
         child: Text('旅拍')
