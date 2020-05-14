@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage>with AutomaticKeepAliveClientMixin{
   }
 
   _jumpToSearch(){
-     Navigator.of(context).pushReplacement(MaterialPageRoute(
+     Navigator.of(context).push(MaterialPageRoute(
        builder: (ctx){
          return SearchPage(hideLeft:false,hint:searchBarDefaultText);
        }
