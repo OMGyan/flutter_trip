@@ -8,7 +8,21 @@ import 'package:flutter_trip/widget/search_bar.dart';
 import 'package:flutter_trip/widget/webview.dart';
 
 const searchBarDefaultText = '网红打卡地 景点 酒店 美食';
-
+const TYPES = [
+  'channelgroup',
+  'gs',
+  'plane',
+  'train',
+  'cruise',
+  'district',
+  'food',
+  'hotel',
+  'huodong',
+  'shop',
+  'sight',
+  'ticket',
+  'travelgroup'
+];
 class SearchPage extends StatefulWidget{
 
   final bool hideLeft;
@@ -25,6 +39,7 @@ class SearchPage extends StatefulWidget{
 
 class _SearchPageState extends State<SearchPage>{
    SearchModel searchModel;
+   var keyword;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +48,7 @@ class _SearchPageState extends State<SearchPage>{
          MediaQuery.removePadding(context: context, child:
          Expanded(child:ListView.builder(itemBuilder: (ctx,index){
                return _item(index);},
-             itemCount: searchModel?.data?.length??0)),
+             itemCount:searchModel?.data?.length??0)),
            removeTop: true,
          )
       ],)
@@ -56,7 +71,7 @@ class _SearchPageState extends State<SearchPage>{
            height: 80,
            decoration: BoxDecoration(color: Colors.white),
            child:SearchBar(hideLeft:widget.hideLeft,hint: widget.hint,
-             onChange: _onTextChange,leftBtnClick:(){
+             onChange:_onTextChange,leftBtnClick:(){
                  Navigator.pop(context);
              },
            )
@@ -66,14 +81,15 @@ class _SearchPageState extends State<SearchPage>{
    }
 
   _onTextChange(String value) {
+     keyword = value;
      if(value.length==0){
        setState(() {
          searchModel = null;
        });
        return;
      }
-     SearchDao.fetch(value).then((SearchModel res) {
-       if(res.keyword==value){
+     SearchDao.fetch(keyword).then((SearchModel res) {
+       if(res.keyword==keyword){
          setState(() {
            searchModel = res;
          });
@@ -96,17 +112,81 @@ class _SearchPageState extends State<SearchPage>{
           return WebView(url:item.url,);
         }));
       },child: Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(width: 0.3,color: Colors.grey))
-      ),child: Row(
+      ),child: Column(
       children: <Widget>[
-        Column(
-          children: <Widget>[
-            Container(
-              width: 300,child: Text('${item.word} ${item.districtName} ${item.zoneName}'),
-            ),
-            Container(
-              width: 300,child: Text('${item.price} ${item.type}'),
-            )],)],),),);}
+        Row(children: <Widget>[
+          Container(
+            child: Container(
+                margin: EdgeInsets.fromLTRB(0, 7, 7,0),
+                child:Image(
+                height: 26,
+                width: 26,
+                image: AssetImage(_typeImage(item.type)))),
+          ), Container(
+            width: 300,child:_title(item),
+          )
+        ]),
+        Container(
+          margin: EdgeInsets.fromLTRB(25, 5, 0, 5),
+          width: 300,child:_subTitle(item),
+        )],),),);}
+
+   _typeImage(String type){
+    if(type == null)return 'images/type_travelgroup.png';
+    String path = 'travelgroup';
+    for (var value in TYPES) {
+      if(type.contains(value)){
+        path = value;
+        break;
+      }
+    }
+    return 'images/type_$path.png';
+   }
+
+   _title(SearchItem item){
+    if(item == null) return null;
+    List<TextSpan> spans = [];
+    spans.addAll(_ketWordTextSpan(item.word,searchModel.keyword));
+    spans.add(TextSpan(text: ' '+item.districtName+' '+item.zoneName,
+    style: TextStyle(fontSize: 16,color: Colors.grey)
+    ));
+    return RichText(text: TextSpan(children: spans),overflow: TextOverflow.ellipsis,);
+   }
+
+   _subTitle(SearchItem item){
+    return RichText(text: TextSpan(children: <TextSpan>[
+      TextSpan(
+        text: item.price,
+        style: TextStyle(fontSize: 16,color: Colors.orange)
+      ),
+
+      TextSpan(
+          text: ' '+item.star,
+          style: TextStyle(fontSize: 12,color: Colors.grey)
+      ),
+    ]));
+
+
+   }
+
+   _ketWordTextSpan(String word, String keyword) {
+     List<TextSpan> spans = [];
+     if(word == null || word.length == 0) return spans;
+     List<String> arr = word.split(keyword);
+     TextStyle normalStyle = TextStyle(fontSize: 16,color: Colors.black87);
+     TextStyle keyWordStyle = TextStyle(fontSize: 16,color: Colors.orange);
+      for (int i = 0; i <arr.length; i++) {
+        if((i+1)%2 == 0){
+          spans.add(TextSpan(text: keyword,style: keyWordStyle));
+        }
+        var value = arr[i];
+        if(value != null && value.length > 0){
+          spans.add(TextSpan(text: value,style: normalStyle));
+        }
+      }
+      return spans;
+   }
 }
