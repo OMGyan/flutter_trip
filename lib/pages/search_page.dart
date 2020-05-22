@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_trip/dao/search_dao.dart';
 import 'package:flutter_trip/model/search_model.dart';
+import 'package:flutter_trip/pages/speak_page.dart';
 import 'package:flutter_trip/widget/search_bar.dart';
 import 'package:flutter_trip/widget/webview.dart';
 
@@ -27,8 +28,8 @@ class SearchPage extends StatefulWidget{
 
   final bool hideLeft;
   final String hint;
-
-  const SearchPage({Key key,this.hideLeft = true, this.hint = searchBarDefaultText}) : super(key: key);
+  final String keyword;
+  const SearchPage({Key key,this.hideLeft = true, this.hint = searchBarDefaultText, this.keyword}) : super(key: key);
 
 
 
@@ -71,8 +72,12 @@ class _SearchPageState extends State<SearchPage>{
            height: 80,
            decoration: BoxDecoration(color: Colors.white),
            child:SearchBar(hideLeft:widget.hideLeft,hint: widget.hint,
-             onChange:_onTextChange,leftBtnClick:(){
+             onChange:_onTextChange,defaultText:widget.keyword,leftBtnClick:(){
                  Navigator.pop(context);
+             },speakClick: (){
+               Navigator.of(context).push(MaterialPageRoute(
+                 builder: (ctx) => SpeakPage()
+               ));
              },
            )
          )

@@ -10,17 +10,16 @@
     <application>
         <service
             android:name="com.baidu.speech.VoiceRecognitionService"
-            android:exported="false" />
+            android:exported="false"/>
         <meta-data
             android:name="com.baidu.speech.APP_ID"
-            android:value="19882431" />
+            android:value="19993783" />
         <meta-data
             android:name="com.baidu.speech.API_KEY"
-            android:value="z1nSgfIcm0WwCkEhR3BBQG5B" />
+            android:value="d8Xf2sLdC7vIiWDmEv4SlvFH" />
         <meta-data
             android:name="com.baidu.speech.SECRET_KEY"
-            android:value="SsLVljqsGxvUlryUF2DRH2294p0Nn4uI" />
+            android:value="ApPjXBLShkcZC6yRBY1uRgOGagK6sHwr" />
     </application>
-
 
 </manifest>

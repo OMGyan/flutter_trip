@@ -7,6 +7,7 @@ import 'package:flutter_trip/model/config_model.dart';
 import 'package:flutter_trip/model/grid_nav_model.dart';
 import 'package:flutter_trip/model/home_model.dart';
 import 'package:flutter_trip/model/sales_box_model.dart';
+import 'package:flutter_trip/pages/speak_page.dart';
 import 'package:flutter_trip/widget/grid_nav.dart';
 import 'package:flutter_trip/widget/loading_container.dart';
 import 'package:flutter_trip/widget/local_nav.dart';
@@ -134,7 +135,9 @@ class _HomePageState extends State<HomePage>with AutomaticKeepAliveClientMixin{
   }
 
   _jumpToSpeak(){
-
+    Navigator.of(context).push(MaterialPageRoute(builder: (ctx){
+      return SpeakPage();
+    }));
   }
 
   _jumpToSearch(){
