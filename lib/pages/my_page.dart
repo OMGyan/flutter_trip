@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_trip/widget/webview.dart';
 
 class MyPage extends StatefulWidget{
   @override
@@ -6,21 +7,16 @@ class MyPage extends StatefulWidget{
 
 }
 
-class _MyPageState extends State<MyPage>with AutomaticKeepAliveClientMixin{
-
+class _MyPageState extends State<MyPage>{
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
-      body:Center(
-        child: Text('我的')
-      )
+      body: WebView(
+        url: 'https://m.ctrip.com/webapp/myctrip/',
+        backForbid: true
+      ),
     );
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 
 }

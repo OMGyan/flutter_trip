@@ -26,9 +26,16 @@ class _TravelTabPageState extends State<TravelTabPage>with AutomaticKeepAliveCli
   List<TravelItem> travelItems;
   int pageIndex = 1;
   bool _loading = true;
+  ScrollController _controller = ScrollController();
   @override
   void initState() {
     _loadData();
+    ///监听列表滚动
+    _controller.addListener((){
+      if(_controller.position.pixels == _controller.position.maxScrollExtent){
+        _loadData(loadmore: true);
+      }
+    });
     super.initState();
   }
 
@@ -39,6 +46,7 @@ class _TravelTabPageState extends State<TravelTabPage>with AutomaticKeepAliveCli
       body:LoadingContainer(isLoading: _loading,
           child: RefreshIndicator(child:MediaQuery.removePadding(context: context,removeTop: true,
               child: StaggeredGridView.countBuilder(
+                controller: _controller,
                 crossAxisCount: 2,
                 itemCount: travelItems?.length??0,
                 itemBuilder: (BuildContext context, int index) => _travelItem(index: index,item: travelItems[index]),
@@ -47,7 +55,12 @@ class _TravelTabPageState extends State<TravelTabPage>with AutomaticKeepAliveCli
               )),onRefresh:_handleRefresh)));
   }
 
-  void _loadData() {
+  void _loadData({loadmore = false}) {
+    if(loadmore){
+      pageIndex++;
+    }else{
+      pageIndex = 1;
+    }
 
     TravelDao.fetch(widget.travelUrl??_TRAVEL_URL,widget.params,widget.groupChannelCode, pageIndex,PAGE_SIZE).then((value){
       _loading = false;

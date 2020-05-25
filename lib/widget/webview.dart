@@ -35,12 +35,7 @@ class _WebViewState extends State<WebView>{
     // TODO: implement initState
     super.initState();
     webviewReference.close();
-    _onUrlChange = webviewReference.onUrlChanged.listen((url){
-
-    });
-
-
-
+    _onUrlChange = webviewReference.onUrlChanged.listen((url){});
     _onStateChange = webviewReference.onStateChanged.listen((state){
       switch(state.type){
         case WebViewState.startLoad:
@@ -54,6 +49,8 @@ class _WebViewState extends State<WebView>{
                 if(!widget.backForbid){
                   Navigator.of(context).pop();
                   isExit = true;
+                }else{
+                  webviewReference.launch(widget.url);
                 }
               }
             }

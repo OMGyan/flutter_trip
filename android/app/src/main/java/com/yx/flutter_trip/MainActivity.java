@@ -3,10 +3,7 @@ package com.yx.flutter_trip;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-
-
 import com.yx.plugin.asr.AsrPlugin;
-
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
