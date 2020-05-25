@@ -1,5 +1,5 @@
 # flutter_trip
-仿携程flutter项目
+flutter练手项目
 
 效果如下:
 
